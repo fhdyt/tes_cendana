@@ -16,13 +16,8 @@ class CendanaModel extends CI_Model
 		$hasil=$this->db->query('SELECT * FROM CENDANA');
 		return $hasil->result();
 	}
-  public function user_detail_model($id)
-  {
-		$hasil=$this->db->get_where('USER',array('RECORD_STATUS' => 'A','USER_ID' => $id));
-		return $hasil->result();
-	}
 
-  public function input_delete_model($id)
+  public function json_delete_model($id)
   {
     $hasil=$this->db->query('DELETE FROM CENDANA WHERE ID='.$id.'');
 		return $hasil;

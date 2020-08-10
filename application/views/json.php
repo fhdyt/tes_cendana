@@ -44,27 +44,36 @@
   </head>
   <body>
     <div class="container">
-    <h1>Cendana</h1>
+    <h1>JSON</h1>
 
     <div class="row">
-      <div class="col-md-4">
+      <div class="col-md-12">
         <form id="form_input">
           <div class="form-group">
-            <label for="exampleInputEmail1">Input Kalimat</label>
-            <input type="text" class="form-control input_kalimat" id="exampleInputEmail1 input_kalimat" name="input_kalimat" placeholder="Email">
+            <label for="exampleInputEmail1">Url Json</label>
+            <input type="text" class="form-control input_json" id="exampleInputEmail1 input_json" name="input_kalimat" placeholder="URL">
           </div>
 
           <button class="btn btn-default simpan_form">Simpan</button>
         </form>
     </div>
-      <div class="col-md-8">
+    </div>
+    <hr>
+    <div class="row">
+      <div class="col-md-12">
         <table class="table">
           <thead>
             <tr>
               <td>ID</td>
-              <td>NAMA</td>
-              <td>UMUR</td>
-              <td>KOTA</td>
+              <td>NAME</td>
+              <td>USERNAME</td>
+              <td>EMAIL</td>
+              <td>PHONE</td>
+              <td>WEBSITE</td>
+              <td>STREET</td>
+              <td>SUITE</td>
+              <td>CITY</td>
+              <td>ZIPCODE</td>
 
             </tr>
           </thead>
@@ -89,17 +98,30 @@
 </html>
 
 <script>
-$("tbody#data_table").on("click","a.delete", function(){
-  var id = $(this).attr("id")
-  $("#myModal").modal("show")
-  input_delete(id)
-})
 
-function input_list()
+$('.simpan_form').on('click',function()
+{
+		var input_json = $('.input_json').val();
+		$.ajax({
+			type : "POST",
+			url  : "json/json_simpan",
+			dataType : "JSON",
+			data : {
+        input_json:input_json,
+      },
+			success: function(data)
+			{
+				alert("Sukses")
+			}
+		});
+		return false;
+});
+
+function json_list()
 {
 	$.ajax({
 		type  : 'ajax',
-		url   : 'index.php/cendana/input_list',
+		url   : 'json/json_list',
 		async : false,
 		dataType : 'json',
 		success : function(data)
@@ -115,12 +137,17 @@ function input_list()
 				for(i=0; i<data.length; i++){
 					 $("#data_table").append('<tr id="'+data[i].ID+'">'+
 							'<td>'+data[i].ID+'</td>'+
-							'<td>'+data[i].NAMA+'</td>'+
-							'<td>'+data[i].UMUR+'</td>'+
-							'<td>'+data[i].KOTA+'</td>'+
+							'<td>'+data[i].NAME+'</td>'+
+							'<td>'+data[i].USERNAME+'</td>'+
+							'<td>'+data[i].EMAIL+'</td>'+
+							'<td>'+data[i].PHONE+'</td>'+
+							'<td>'+data[i].WEBSITE+'</td>'+
 
-							'<td><a class="btn btn-sm btn-danger delete" id="'+data[i].ID+'">Hapus</a> '+
-							'<a class="btn btn-sm btn-default edit" id="'+data[i].ID+'">Edit</a></td>'+
+							'<td>'+data[i].STREET+'</td>'+
+							'<td>'+data[i].SUITE+'</td>'+
+							'<td>'+data[i].CITY+'</td>'+
+							'<td>'+data[i].ZIPCODE+'</td>'+
+
 							'</tr>');
 				}
 			}
@@ -132,60 +159,6 @@ function input_list()
 }
 $(function()
 {
-  input_list();
+  json_list();
 });
-
-$('.simpan_form').on('click',function()
-{
-  var str1 = $(".input_kalimat").val();
-if(str1.indexOf("Tahun") != -1){
-    alert("Tidak boleh menggunakan 'Tahun'")
-}
-else if(str1.indexOf("THN") != -1){
-    alert("Tidak boleh menggunakan 'THN'")
-}
-else if(str1.indexOf("th") != -1){
-    alert("Tidak boleh menggunakan 'th'")
-}
-else{
-
-		var input_kalimat = $('.input_kalimat').val();
-		$.ajax({
-			type : "POST",
-			url  : "index.php/cendana/input_simpan",
-			dataType : "JSON",
-			data : {
-        input_kalimat:input_kalimat,
-      },
-			success: function(data)
-			{
-				input_list();
-			}
-		});
-  }
-		return false;
-});
-
-function input_delete(id) {
-  //alert(id)
- 	$.ajax({
- 		type  : 'ajax',
- 		url   : 'index.php/cendana/input_delete/'+id,
- 		async : false,
- 		dataType : 'json',
- 		success : function(data)
- 		{
- 			if (data.length === 0)
- 			{
- 			}
- 			else
- 			{
- 				input_list()
- 			}
- 		},
-     error: function(x, e) {
-       alert("Gagal Mengambil Data")
-     } //end error
- 	});
-}
 </script>
