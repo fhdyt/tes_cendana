@@ -6,10 +6,11 @@ Fitur yang digunakan
 * JQuery
 * Database MySQL
 
+
 Screenshot | Link
 ------------ | -------------
-![Soal Pertama](https://github.com/fhdyt/tes_cendana/blob/master/image/ss1.png) | [Soal Pertama](http://localhost/ci/).
-![Soal Kedua](https://github.com/fhdyt/tes_cendana/blob/master/image/ss2.png) | [Soal Kedua](http://localhost/ci/index.php/json).
+![Soal Pertama](https://github.com/fhdyt/tes_cendana/blob/master/image/ss1.png) | [Soal Pertama](http://localhost/test_cendana/).
+![Soal Kedua](https://github.com/fhdyt/tes_cendana/blob/master/image/ss2.png) | [Soal Kedua](http://localhost/test_cendana/index.php/json).
 
 ## Soal Pertama
 Input data dengan format <nama lengkap><umur><kota>
