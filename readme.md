@@ -1,5 +1,5 @@
 # TEST PROGRAMMER
-[Petunjuk soal](https://github.com/fhdyt/tes_cendana/blob/master/Soal%20Praktek%20PHP-revisi%202020.pdf).
+![Petunjuk soal](https://github.com/fhdyt/tes_cendana/blob/master/Soal%20Praktek%20PHP-revisi%202020.pdf).
 Screenshot | Link
 ------------ | -------------
 ![Soal Pertama](https://github.com/fhdyt/tes_cendana/blob/master/image/ss1.png) | [Soal Pertama](http://localhost/ci/).
