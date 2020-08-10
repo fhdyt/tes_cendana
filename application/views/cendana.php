@@ -82,6 +82,39 @@
     </div>
   </div>
 
+  <div id="myModal" class="modal fade" role="dialog">
+    <div class="modal-dialog">
+
+      <!-- Modal content-->
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+          <h4 class="modal-title">Modal Detail</h4>
+        </div>
+        <div class="modal-body">
+          <form id="form_input">
+            <div class="form-group">
+              <label for="exampleInputEmail1">ID</label>
+              <input type="text" class="form-control id_kalimat" id="exampleInputEmail1 id_kalimat" name="input_kalimat" placeholder="Email">
+            </div>
+            <div class="form-group">
+              <label for="exampleInputEmail1">Input Kalimat</label>
+              <input type="text" class="form-control input_kalimat_edit" id="exampleInputEmail1 input_kalimat_edit" name="input_kalimat" placeholder="Email">
+            </div>
+
+
+          </form>
+        </div>
+        <div class="modal-footer">
+          <button class="btn btn-default simpan_form_edit">Simpan</button>
+          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
     <!-- Include all compiled plugins (below), or include individual files as needed -->
     <script src="<?php echo base_url(); ?>assets/js/bootstrap.min.js"></script>
@@ -89,9 +122,20 @@
 </html>
 
 <script>
+$("tbody#data_table").on("click","a.edit", function(){
+  var id = $(this).attr("id")
+  var nama = $(this).attr("nama")
+  var umur = $(this).attr("umur")
+  var kota = $(this).attr("kota")
+  var kalimat = nama + " " + umur + " " + kota
+  $('.input_kalimat_edit').val(kalimat)
+  $('.id_kalimat').val(id)
+  $("#myModal").modal("show")
+  detail(id)
+})
+
 $("tbody#data_table").on("click","a.delete", function(){
   var id = $(this).attr("id")
-  $("#myModal").modal("show")
   input_delete(id)
 })
 
@@ -120,7 +164,7 @@ function input_list()
 							'<td>'+data[i].KOTA+'</td>'+
 
 							'<td><a class="btn btn-sm btn-danger delete" id="'+data[i].ID+'">Hapus</a> '+
-							'<a class="btn btn-sm btn-default edit" id="'+data[i].ID+'">Edit</a></td>'+
+							'<a class="btn btn-sm btn-default edit" id="'+data[i].ID+'" nama="'+data[i].NAMA+'" umur="'+data[i].UMUR+'" kota="'+data[i].KOTA+'">Edit</a></td>'+
 							'</tr>');
 				}
 			}
@@ -147,25 +191,52 @@ else if(str1.indexOf("THN") != -1){
 else if(str1.indexOf("th") != -1){
     alert("Tidak boleh menggunakan 'th'")
 }
-else{
-
+else
+{
 		var input_kalimat = $('.input_kalimat').val();
-		$.ajax({
-			type : "POST",
-			url  : "index.php/cendana/input_simpan",
-			dataType : "JSON",
-			data : {
-        input_kalimat:input_kalimat,
-      },
-			success: function(data)
-			{
-				input_list();
-			}
-		});
-  }
+		var id = '';
+    simpan(id, input_kalimat)
+}
 		return false;
 });
 
+$('.simpan_form_edit').on('click',function()
+{
+  var str1 = $(".input_kalimat").val();
+  if(str1.indexOf("Tahun") != -1){
+      alert("Tidak boleh menggunakan 'Tahun'")
+  }
+  else if(str1.indexOf("THN") != -1){
+      alert("Tidak boleh menggunakan 'THN'")
+  }
+  else if(str1.indexOf("th") != -1){
+      alert("Tidak boleh menggunakan 'th'")
+  }
+  else
+  {
+  		var id = $('.id_kalimat').val();
+  		var input_kalimat = $('.input_kalimat_edit').val();
+      simpan(id, input_kalimat)
+    }
+		return false;
+});
+
+function simpan(id, input_kalimat){
+  $.ajax({
+    type : "POST",
+    url  : "index.php/cendana/input_simpan",
+    dataType : "JSON",
+    data : {
+      input_kalimat:input_kalimat,
+      id:id,
+    },
+    success: function(data)
+    {
+      input_list();
+      $("#myModal").modal("hide")
+    }
+  });
+}
 function input_delete(id) {
   //alert(id)
  	$.ajax({

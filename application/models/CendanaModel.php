@@ -17,7 +17,7 @@ class CendanaModel extends CI_Model
 		return $hasil->result();
 	}
 
-  public function json_delete_model($id)
+  public function input_delete_model($id)
   {
     $hasil=$this->db->query('DELETE FROM CENDANA WHERE ID='.$id.'');
 		return $hasil;
@@ -35,10 +35,18 @@ class CendanaModel extends CI_Model
         'NAMA' 			=> strtoupper($nama),
         'UMUR' 			=> strtoupper($umur),
         'KOTA' 			=> strtoupper($kota),
-      //  'USER_JK' 			=> $this->input->post('jk'),
+    );
 
-      );
-    $result=$this->db->insert('CENDANA',$data);
+    if($this->input->post('id') == '')
+    {
+      $result=$this->db->insert('CENDANA',$data);
+    }
+    else
+    {
+      $this->db->where('ID', $this->input->post('id'));
+      $result=$this->db->update('CENDANA',$data);
+    }
+
     return $result;
   }
 }
