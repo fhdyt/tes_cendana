@@ -1,5 +1,11 @@
 # TEST PROGRAMMER
-![Petunjuk soal](https://github.com/fhdyt/tes_cendana/blob/master/Soal%20Praktek%20PHP-revisi%202020.pdf).
+Fitur yang digunakan
+* PHP
+* CodeIgniter
+* Ajax
+* JQuery
+* Database MySQL
+
 Screenshot | Link
 ------------ | -------------
 ![Soal Pertama](https://github.com/fhdyt/tes_cendana/blob/master/image/ss1.png) | [Soal Pertama](http://localhost/ci/).
@@ -12,3 +18,6 @@ Input data dengan format <nama lengkap><umur><kota>
 ## Soal Kedua
 Input Json URL pada field input_json
 > Contoh : https://jsonplaceholder.typicode.com/users
+
+
+[Link](https://github.com/fhdyt/tes_cendana/blob/master/Soal%20Praktek%20PHP-revisi%202020.pdf).
